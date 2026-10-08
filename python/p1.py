@@ -1,0 +1,57 @@
+def analyze_text(text):
+    # Basic counts
+    characters = len(text)
+    characters_no_spaces = len(text.replace(" ", "").replace("\n", ""))
+
+   
+    word_count = len(words)
+
+    sentences = re.findall(r'[.!?]+', text)
+    sentence_count = len(sentences)
+
+    lines = text.splitlines()
+    line_count = len(lines)
+
+    # Most common words
+    common_words = Counter(words).most_common(5)
+
+    return {
+        "Characters": characters,
+        "Characters (without spaces)": characters_no_spaces,
+        "Words": word_count,
+        "Sentences": sentence_count,
+        "Lines": line_count,
+        "Most common words": common_words
+    }
+
+
+# Main program
+print("=== Simple Text Analysis Tool ===")
+print("Enter your text below.")
+print("Type 'END' on a new line when finished.\n")
+
+text_lines = []
+
+while True:
+    line = input()
+    if line.strip().upper() == "END":
+        break
+    text_lines.append(line)
+
+text = "\n".join(text_lines)
+
+if text.strip():
+    result = analyze_text(text)
+
+    print("\n=== Analysis Result ===")
+    print(f"Characters: {result['Characters']}")
+    print(f"Characters (without spaces): {result['Characters (without spaces)']}")
+    print(f"Words: {result['Words']}")
+    print(f"Sentences: {result['Sentences']}")
+    print(f"Lines: {result['Lines']}")
+
+    print("\nMost common words:")
+    for word, count in result["Most common words"]:
+        print(f"{word}: {count}")
+else:
+    print("No text was entered.")
